@@ -1,0 +1,855 @@
+Я создам современную адаптивную лендинг-страницу для вашей кофейни с теплой цветовой схемой и всеми требуемыми функциями.
+
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Два пончика и чашка кофе — Уютная кофейня</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ===== ОСНОВНЫЕ СТИЛИ И ПЕРЕМЕННЫЕ ===== */
+        :root {
+            --color-brown-dark: #3E2723;
+            --color-brown-medium: #6D4C41;
+            --color-brown-light: #8D6E63;
+            --color-cream: #FFF8E1;
+            --color-cream-dark: #FFECB3;
+            --color-beige: #D7CCC8;
+            --color-accent: #FF8A65;
+            --color-text: #3E2723;
+            --color-text-light: #5D4037;
+            --shadow: 0 4px 6px rgba(62, 39, 35, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 248, 225, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(255, 248, 225, 0.98);
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-brown-dark);
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--color-accent);
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--color-text);
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-accent);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 24px;
+            position: relative;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--color-brown-dark);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) { top: 0px; }
+        .hamburger span:nth-child(2) { top: 9px; }
+        .hamburger span:nth-child(3) { top: 18px; }
+
+        .hamburger.active span:nth-child(1) {
+            top: 9px;
+            transform: rotate(135deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            top: 9px;
+            transform: rotate(-135deg);
+        }
+
+        /* ===== ГЛАВНЫЙ РАЗДЕЛ ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-cream-dark) 100%);
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, var(--color-beige) 0%, transparent 70%);
+            opacity: 0.3;
+            transform: rotate(45deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            color: var(--color-brown-dark);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--color-text-light);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--color-accent);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(255, 138, 101, 0.3);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn:hover {
+            background-color: #FF7043;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 138, 101, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* ===== О КОМПАНИИ ===== */
+        .about {
+            background-color: white;
+        }
+
+        .about h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--color-brown-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .about h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-accent);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            padding: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+        }
+
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background-color: var(--color-beige);
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '☕';
+            font-size: 8rem;
+            opacity: 0.2;
+            position: absolute;
+        }
+
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.15);
+        }
+
+        /* ===== МЕНЮ ===== */
+        .menu {
+            background-color: var(--color-cream);
+        }
+
+        .menu h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--color-brown-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .menu h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-accent);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(62, 39, 35, 0.2);
+        }
+
+        .menu-item-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--color-beige), var(--color-cream-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-item-img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-content {
+            padding: 25px;
+        }
+
+        .menu-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--color-brown-dark);
+        }
+
+        .menu-item-price {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 10px;
+        }
+
+        .menu-item-desc {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contact {
+            background-color: white;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--color-brown-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-accent);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            text-align: center;
+            padding: 30px;
+            background: var(--color-cream);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .contact-info:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--color-brown-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            color: var(--color-text-light);
+            font-size: 1.1rem;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--color-accent);
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            background-color: var(--color-brown-dark);
+            color: var(--color-cream);
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--color-cream);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 248, 225, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background-color: var(--color-accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 248, 225, 0.2);
+        }
+
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== МЕДИА-ЗАПРОСЫ ===== */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about-image {
+                height: 300px;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--color-cream);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+
+            .nav-container {
+                padding: 0 10px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding-top: 70px;
+                min-height: auto;
+                padding-bottom: 40px;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">Два пончика</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Главная</a></li>
+                <li><a href="#about" class="nav-link">О нас</a></li>
+                <li><a href="#menu" class="nav-link">Меню</a></li>
+                <li><a href="#contact" class="nav-link">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Главный раздел -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Два пончика и чашка кофе</h1>
+                <p>Уютная кофейня в самом сердце города, где каждая чашка кофе — это маленькое искусство, а каждый пончик — повод для улыбки.</p>
+                <a href="#menu" class="btn">Познакомиться с меню</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- О компании -->
+    <section id="about" class="about section">
+        <div class="container">
+            <h2 class="fade-in">Наша история</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>Кофейня "Два пончика и чашка кофе" открылась в 2018 году благодаря любви двух друзей к кофе и выпечке. Наша миссия — создавать уютное пространство, где можно отдохнуть от городской суеты и насладиться чашечкой ароматного кофе.</p>
+                    <p>Мы закупаем свежайшие зерна у проверенных поставщиков, а наши повара каждый день выпекают нежные пончины и десерты по старинным рецептам.</p>
+                    <p>За эти годы мы стали местом встреч для постоянных гостей, а наш белый кот Марсель стал неофициальным талисманом заведения.</p>
+                </div>
+                <div class="about-image fade-in">
+                    <!-- Изображение-заглушка -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Меню -->
+    <section id="menu" class="menu section">
+        <div class="container">
+            <h2 class="fade-in">Наши фирменные напитки</h2>
+            <div class="menu-grid">
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">☕</div>
+                    <div class="menu-item-content">
+                        <h3>Эспрессо "Два пончика"</h3>
+                        <p class="menu-item-price">280 ₽</p>
+                        <p class="menu-item-desc">Классический эспрессо сдвоенной порции, подаётся с двумя мини-пончиками в виде сердечек.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">🥛</div>
+                    <div class="menu-item-content">
+                        <h3>Латте "Утро кофемана"</h3>
+                        <p class="menu-item-price">350 ₽</p>
+                        <p class="menu-item-desc">Ароматный эспрессо с молоком и swirl-прослойкой карамели, украшенный пышным пончиком на палочке.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">🧊</div>
+                    <div class="menu-item-content">
+                        <h3>Аффогато "Шоколадная радость"</h3>
+                        <p class="menu-item-price">320 ₽</p>
+                        <p class="menu-item-desc">Ванильное мороженое в чашке эспрессо, с шоколадным соусом и крошкой от пончика.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">🍵</div>
+                    <div class="menu-item-content">
+                        <h3>Раф "Медовый закат"</h3>
+                        <p class="menu-item-price">340 ₽</p>
+                        <p class="menu-item-desc">Нежный кофейный напиток с мёдом, имбирём и крем-фреш, подаётся с медовым пончиком.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <h2 class="fade-in">Контакты и часы работы</h2>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3><span class="contact-icon">📍</span> Адрес</h3>
+                    <p>г. Москва, ул. Арбат, д. 24</p>
+                    <p>Ближайшая станция метро: "Арбатская"</p>
+                </div>
+
+                <div class="contact-info fade-in">
+                    <h3><span class="contact-icon">🕐</span> Часы работы</h3>
+                    <p>Понедельник — Пятница: 8:00 — 22:00</p>
+                    <p>Суббота — Воскресенье: 9:00 — 23:00</p>
+                </div>
+
+                <div class="contact-info fade-in">
+                    <h3><span class="contact-icon">📞</span> Контакты</h3>
+                    <p>Телефон: +7 (495) 123-45-67</p>
+                    <p>Email: hello@2donuts.ru</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Два пончика и чашка кофе</div>
+                <p>Где каждая чашка — особенная, а каждый пончик — с душой.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="VK">ВК</a>
+                    <a href="#" class="social-link" title="Telegram">ТГ</a>
+                    <a href="#" class="social-link" title="Instagram">IG</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 "Два пончика и чашка кофе". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на ссылку
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Плавная прокрутка к якорям (для старых браузеров)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 70;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Изменение стиля навбара при скролле
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Анимация появления элементов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Закрытие меню при клике вне его области (для мобильной версии)
+        document.addEventListener('click', (e) => {
+            if (hamburger.classList.contains('active') && 
+                !navMenu.contains(e.target) && 
+                !hamburger.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+## Ключевые особенности реализации:
+
+### 🎨 **Дизайн и цвета**
+- Тёплая палитра: коричневые (#3E2723, #6D4C41), кремовый (#FFF8E1), бежевый (#D7CCC8) и акцентный оранжевый (#FF8A65)
+- Современные шрифты: Playfair Display для заголовков, Roboto для текста
+
+### 📱 **Адаптивность**
+- Mobile-first подход
+- Гамбургер-меню для мобильных устройств
+- Адаптивная сетка с CSS Grid
+- Гибкие отступы и размеры шрифтов с `clamp()`
+
+### ⚡ **Интерактивность**
+- Плавная прокрутка между разделами (`scroll-behavior: smooth`)
+- Анимации при наведении на кнопки и карточки меню
+- Появление элементов при скролле (Intersection Observer)
+- Фиксированная навигация с изменением стиля при скролле
+
+### 🏗️ **Структура**
+1. **Hero-секция** с броским слоганом и CTA-кнопкой
+2. **О компании** с историей и декоративным блоком
+3. **Меню** из 4 карточек с затейливыми названиями
+4. **Контакты** в трёх колонках с иконками
+5. **Футер** с соцсетями и копирайтом
+
+Все стили и JavaScript встроены в один HTML-файл, что соответствует требованию. Страница готова к использованию — просто сохраните код как `index.html` и откройте в браузере.
