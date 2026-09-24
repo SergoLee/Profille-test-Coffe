@@ -1,12 +1,9 @@
-Я создам современную адаптивную лендинг-страницу для вашей кофейни с теплой цветовой схемой и всеми требуемыми функциями.
-
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Два пончика и чашка кофе — Уютная кофейня</title>
+    <title>ТРИ  пончика и чашка кофе — Уютная кофейня</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -22,8 +19,9 @@
             --color-accent: #FF8A65;
             --color-text: #3E2723;
             --color-text-light: #5D4037;
-            --shadow: 0 4px 6px rgba(62, 39, 35, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 8px 30px rgba(62,39,35,0.06), 0 2px 8px rgba(62,39,35,0.04);
+            --shadow-hover: 0 12px 40px rgba(62,39,35,0.10), 0 4px 12px rgba(62,39,35,0.06);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -41,7 +39,7 @@
             font-family: 'Roboto', sans-serif;
             color: var(--color-text);
             background-color: var(--color-cream);
-            line-height: 1.6;
+            line-height: 1.75;
             overflow-x: hidden;
         }
 
@@ -64,7 +62,7 @@
         }
 
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         /* ===== НАВИГАЦИЯ ===== */
@@ -73,15 +71,16 @@
             top: 0;
             left: 0;
             right: 0;
-            background-color: rgba(255, 248, 225, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 248, 225, 0.80);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             box-shadow: var(--shadow);
             z-index: 1000;
             transition: var(--transition);
         }
 
         .navbar.scrolled {
-            background-color: rgba(255, 248, 225, 0.98);
+            background-color: rgba(255, 248, 225, 0.90);
             padding: 10px 0;
         }
 
@@ -192,13 +191,25 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -30%;
-            width: 80%;
-            height: 200%;
-            background: radial-gradient(circle, var(--color-beige) 0%, transparent 70%);
-            opacity: 0.3;
+            top: -30%;
+            right: -20%;
+            width: 70%;
+            height: 160%;
+            background: radial-gradient(ellipse, var(--color-beige) 0%, transparent 70%);
+            opacity: 0.25;
             transform: rotate(45deg);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -15%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse, var(--color-cream-dark) 0%, transparent 70%);
+            opacity: 0.3;
+            filter: blur(80px);
         }
 
         .hero-content {
@@ -238,8 +249,8 @@
 
         .btn:hover {
             background-color: #FF7043;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 138, 101, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 138, 101, 0.35);
         }
 
         .btn:active {
@@ -248,7 +259,7 @@
 
         /* ===== О КОМПАНИИ ===== */
         .about {
-            background-color: white;
+            background: linear-gradient(180deg, var(--color-cream) 0%, white 8%, white 92%, var(--color-cream) 100%);
         }
 
         .about h2 {
@@ -258,6 +269,7 @@
             color: var(--color-brown-dark);
             position: relative;
             padding-bottom: 15px;
+            letter-spacing: 0.02em;
         }
 
         .about h2::after {
@@ -289,7 +301,7 @@
         }
 
         .about-image {
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -310,12 +322,12 @@
 
         .about-image:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.15);
+            box-shadow: var(--shadow-hover);
         }
 
         /* ===== МЕНЮ ===== */
         .menu {
-            background-color: var(--color-cream);
+            background: linear-gradient(180deg, white 0%, var(--color-cream) 8%, var(--color-cream) 92%, white 100%);
         }
 
         .menu h2 {
@@ -325,6 +337,7 @@
             color: var(--color-brown-dark);
             position: relative;
             padding-bottom: 15px;
+            letter-spacing: 0.02em;
         }
 
         .menu h2::after {
@@ -346,7 +359,7 @@
 
         .menu-item {
             background: white;
-            border-radius: 15px;
+            border-radius: 24px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -354,8 +367,8 @@
         }
 
         .menu-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(62, 39, 35, 0.2);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
         }
 
         .menu-item-img {
@@ -366,6 +379,16 @@
             justify-content: center;
             font-size: 4rem;
             transition: var(--transition);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .menu-item-img-photo {
+            height: 200px;
+            background: none;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 24px 24px 0 0;
         }
 
         .menu-item:hover .menu-item-img {
@@ -394,9 +417,18 @@
             font-size: 0.95rem;
         }
 
+        /* Ограничение ширины карточки в разделе пончиков */
+        #donuts .menu-grid {
+            justify-items: center;
+        }
+        #donuts .menu-item {
+            max-width: 350px;
+            width: 100%;
+        }
+
         /* ===== КОНТАКТЫ ===== */
         .contact {
-            background-color: white;
+            background: linear-gradient(180deg, var(--color-cream) 0%, white 8%, white 100%);
         }
 
         .contact h2 {
@@ -406,6 +438,7 @@
             color: var(--color-brown-dark);
             position: relative;
             padding-bottom: 15px;
+            letter-spacing: 0.02em;
         }
 
         .contact h2::after {
@@ -429,13 +462,13 @@
             text-align: center;
             padding: 30px;
             background: var(--color-cream);
-            border-radius: 15px;
+            border-radius: 24px;
             transition: var(--transition);
         }
 
         .contact-info:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
         }
 
         .contact-info h3 {
@@ -461,7 +494,7 @@
 
         /* ===== ФУТЕР ===== */
         footer {
-            background-color: var(--color-brown-dark);
+            background: linear-gradient(180deg, #4E342E 0%, var(--color-brown-dark) 100%);
             color: var(--color-cream);
             padding: 50px 0 30px;
             text-align: center;
@@ -626,7 +659,8 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link">Главная</a></li>
                 <li><a href="#about" class="nav-link">О нас</a></li>
-                <li><a href="#menu" class="nav-link">Меню</a></li>
+                <li><a href="#menu" class="nav-link">Напитки</a></li>
+                <li><a href="#donuts" class="nav-link">Пончики</a></li>
                 <li><a href="#contact" class="nav-link">Контакты</a></li>
             </ul>
         </div>
@@ -666,7 +700,7 @@
             <h2 class="fade-in">Наши фирменные напитки</h2>
             <div class="menu-grid">
                 <div class="menu-item fade-in">
-                    <div class="menu-item-img">☕</div>
+                    <div class="menu-item-img menu-item-img-photo" style="background-image: url('expresso.jpg');"></div>
                     <div class="menu-item-content">
                         <h3>Эспрессо "Два пончика"</h3>
                         <p class="menu-item-price">280 ₽</p>
@@ -675,7 +709,7 @@
                 </div>
 
                 <div class="menu-item fade-in">
-                    <div class="menu-item-img">🥛</div>
+                    <div class="menu-item-img menu-item-img-photo" style="background-image: url('raf.jpg');"></div>
                     <div class="menu-item-content">
                         <h3>Латте "Утро кофемана"</h3>
                         <p class="menu-item-price">350 ₽</p>
@@ -684,7 +718,7 @@
                 </div>
 
                 <div class="menu-item fade-in">
-                    <div class="menu-item-img">🧊</div>
+                    <div class="menu-item-img menu-item-img-photo" style="background-image: url('aff.jpg');"></div>
                     <div class="menu-item-content">
                         <h3>Аффогато "Шоколадная радость"</h3>
                         <p class="menu-item-price">320 ₽</p>
@@ -693,11 +727,27 @@
                 </div>
 
                 <div class="menu-item fade-in">
-                    <div class="menu-item-img">🍵</div>
+                    <div class="menu-item-img menu-item-img-photo" style="background-image: url('raf.jpg');"></div>
                     <div class="menu-item-content">
                         <h3>Раф "Медовый закат"</h3>
                         <p class="menu-item-price">340 ₽</p>
                         <p class="menu-item-desc">Нежный кофейный напиток с мёдом, имбирём и крем-фреш, подаётся с медовым пончиком.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Пончики -->
+    <section id="donuts" class="menu section" style="background-color: white;">
+        <div class="container">
+            <h2 class="fade-in">Наши фирменные пончики</h2>
+            <div class="menu-grid">
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img menu-item-img-photo" style="background-image: url('fahim-mohammed-jaseem-EumgKI11Hns-unsplash%20(1).jpg');"></div>
+                    <div class="menu-item-content">
+                        <h3>Сахарный пончик</h3>
+                        <p class="menu-item-price">150 ₽</p>
                     </div>
                 </div>
             </div>
@@ -776,7 +826,7 @@
                     const headerOffset = 70;
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
+
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
@@ -815,8 +865,8 @@
 
         // Закрытие меню при клике вне его области (для мобильной версии)
         document.addEventListener('click', (e) => {
-            if (hamburger.classList.contains('active') && 
-                !navMenu.contains(e.target) && 
+            if (hamburger.classList.contains('active') &&
+                !navMenu.contains(e.target) &&
                 !hamburger.contains(e.target)) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
@@ -825,31 +875,3 @@
     </script>
 </body>
 </html>
-```
-
-## Ключевые особенности реализации:
-
-### 🎨 **Дизайн и цвета**
-- Тёплая палитра: коричневые (#3E2723, #6D4C41), кремовый (#FFF8E1), бежевый (#D7CCC8) и акцентный оранжевый (#FF8A65)
-- Современные шрифты: Playfair Display для заголовков, Roboto для текста
-
-### 📱 **Адаптивность**
-- Mobile-first подход
-- Гамбургер-меню для мобильных устройств
-- Адаптивная сетка с CSS Grid
-- Гибкие отступы и размеры шрифтов с `clamp()`
-
-### ⚡ **Интерактивность**
-- Плавная прокрутка между разделами (`scroll-behavior: smooth`)
-- Анимации при наведении на кнопки и карточки меню
-- Появление элементов при скролле (Intersection Observer)
-- Фиксированная навигация с изменением стиля при скролле
-
-### 🏗️ **Структура**
-1. **Hero-секция** с броским слоганом и CTA-кнопкой
-2. **О компании** с историей и декоративным блоком
-3. **Меню** из 4 карточек с затейливыми названиями
-4. **Контакты** в трёх колонках с иконками
-5. **Футер** с соцсетями и копирайтом
-
-Все стили и JavaScript встроены в один HTML-файл, что соответствует требованию. Страница готова к использованию — просто сохраните код как `index.html` и откройте в браузере.
